@@ -2,7 +2,6 @@ package com.github.yukota.urban;
 
 public class Main {
 	
-	//�ݒ�
 	private static int AGENT_NUM = 1;
 	
 
