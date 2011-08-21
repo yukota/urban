@@ -1,0 +1,8 @@
+#classファイルの無視
+*.class
+
+#eclipse用ファイルの無視
+.checkstyle
+.classpath
+.project
+.settings*
