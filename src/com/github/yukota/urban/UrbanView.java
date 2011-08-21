@@ -46,13 +46,13 @@ public class UrbanView {
 	    double lengthOfWorldHeight = this.controller.getLengthOfWorldHeight();
 	    
 	    //描写ベースの作成
+	    //basePanelに複数レイヤを重ねる
 	    JPanel basePanel = new JPanel();
 	    basePanel.setLayout(new OverlayLayout(basePanel));
 	    //街の輪っかをかきます
 	    Coord centerOfHomezone = this.controller.getCoordCenterOfHomezone();
 	    double lengthOfHomezone = this.controller.getLengthOfHomezone();
-	    //お家を書きます
-	    JPanel cityPanel = new BackgroundMapPanel(lengthOfWorldWidth,lengthOfWorldHeight,centerOfHomezone, lengthOfHomezone);
+	    JPanel cityPanel = new BackgroundMapPanel(lengthOfWorldWidth, lengthOfWorldHeight,centerOfHomezone, lengthOfHomezone);
 	    cityPanel.setOpaque(false);
 	    basePanel.add(cityPanel,"1");
 	    
@@ -60,11 +60,11 @@ public class UrbanView {
 	    //家の一覧
 	    //座標取得
 	    Coord [] homeCoord = this.controller.getCoordOfHome();
-	    System.out.println("coordNum"+homeCoord.length);
-	    
 	    JPanel homePanel = new HomeMapPanel(lengthOfWorldWidth,lengthOfWorldHeight,homeCoord);
 	    homePanel.setOpaque(false);
 	    basePanel.add(homePanel,"-2");
+	    
+	    //会社の描写
 	    
 	    //パネルの合成
 	    return basePanel;
