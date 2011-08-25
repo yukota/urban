@@ -179,12 +179,20 @@ public class UrbanModel {
 
     public Coord[] getCoordOfHome() {
         int homeNum = home.length;
-        System.out.println("get"+homeNum);
         Coord [] homeCoord = new Coord[homeNum];
-        for(int loop = 0; loop < homeNum;loop++) {
+        for (int loop = 0; loop < homeNum; loop++) {
             homeCoord [loop] = home[loop].getCoord();
         }
         return homeCoord;
+    }
+
+    public Coord[] getCoordOfCompany() {
+        int companyNum = company.length;
+        Coord [] companyCoord = new Coord[companyNum];
+        for (int loop = 0; loop < companyNum; loop++) {
+            companyCoord [loop] = company[loop].getCoord();
+        }
+        return companyCoord;
     }
 	
 	

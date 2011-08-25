@@ -52,19 +52,23 @@ public class UrbanView {
 	    //街の輪っかをかきます
 	    Coord centerOfHomezone = this.controller.getCoordCenterOfHomezone();
 	    double lengthOfHomezone = this.controller.getLengthOfHomezone();
-	    JPanel cityPanel = new BackgroundMapPanel(lengthOfWorldWidth, lengthOfWorldHeight,centerOfHomezone, lengthOfHomezone);
+	    JPanel cityPanel = new BackgroundMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, centerOfHomezone, lengthOfHomezone);
 	    cityPanel.setOpaque(false);
-	    basePanel.add(cityPanel,"1");
+	    basePanel.add(cityPanel, "1");
 	    
 	    //お家を書きます
 	    //家の一覧
 	    //座標取得
 	    Coord [] homeCoord = this.controller.getCoordOfHome();
-	    JPanel homePanel = new HomeMapPanel(lengthOfWorldWidth,lengthOfWorldHeight,homeCoord);
+	    JPanel homePanel = new HomeMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, homeCoord);
 	    homePanel.setOpaque(false);
-	    basePanel.add(homePanel,"-2");
+	    basePanel.add(homePanel, "-2");
 	    
 	    //会社の描写
+	    Coord [] companyCoord = this.controller.getCoordOfCompany();
+	    JPanel companyPanel = new CompanyMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, companyCoord);
+	    companyPanel.setOpaque(false);
+	    basePanel.add(companyPanel, "-3");
 	    
 	    //パネルの合成
 	    return basePanel;

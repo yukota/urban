@@ -33,4 +33,9 @@ public class UrbanController {
         return homeCoord;
     }
 
+    public Coord[] getCoordOfCompany() {
+        Coord [] companyCoord = this.model.getCoordOfCompany(); 
+        return companyCoord;
+    }
+
 }
