@@ -70,6 +70,13 @@ public class UrbanView {
 	    companyPanel.setOpaque(false);
 	    basePanel.add(companyPanel, "-3");
 	    
+	    
+	    //agentの描写
+	    Coord [] agentCoord = this.controller.getCoordOfAgent();
+	    JPanel agentPanel = new AgentMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, agentCoord);
+	    agentPanel.setOpaque(false);
+	    basePanel.add(agentPanel, "-4");
+	    
 	    //パネルの合成
 	    return basePanel;
 	}

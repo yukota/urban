@@ -194,6 +194,15 @@ public class UrbanModel {
         }
         return companyCoord;
     }
+
+     Coord[] getCoordOfAgent() {
+        int agentNum = company.length;
+        Coord [] agentCoord = new Coord[agentNum];
+        for (int loop = 0; loop < agentNum; loop++) {
+            agentCoord [loop] = agent[loop].getCoord();
+        }
+        return agentCoord;
+    }
 	
 	
 	

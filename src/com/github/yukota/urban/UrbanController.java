@@ -38,4 +38,9 @@ public class UrbanController {
         return companyCoord;
     }
 
+    public Coord[] getCoordOfAgent() {
+        Coord [] agentCoord = this.model.getCoordOfAgent(); 
+        return agentCoord;
+    }
+
 }

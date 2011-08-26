@@ -64,6 +64,9 @@ public class UrbanAgent {
         usableTime = (double) tempUsableTime / 100;
     }
     
+    public Coord getCoord(){
+        return this.coord;
+    }
     
        
     
