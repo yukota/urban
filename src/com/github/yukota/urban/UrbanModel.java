@@ -143,7 +143,7 @@ public class UrbanModel {
 	    //設定park数
 	    int bikelotNum = params.getNumOfBikeLot();
 	    bikeLot = new UrbanBikeLot[bikelotNum];
-	    for (int loop = 0;loop < bikelotNum;loop += 2) {
+	    for (int loop = 0; loop < bikelotNum; loop += 2) {
 	        bikeLot[loop] = new UrbanBikeLot(lengthOfStations, lengthOfBusinesszone);
 	        bikeLot[loop + 1] = new UrbanBikeLot(lengthOfStations, lengthOfBusinesszone);
 			BoxMuller boxMuller1 = bikeLot[loop].getBoxMuller();

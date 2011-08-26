@@ -22,7 +22,6 @@ public class AgentMapPanel extends MapPanel {
            drawCircle(coord[loop], 100,Color.BLACK);
         }
         //座標変換
-        //
         
     }
 
