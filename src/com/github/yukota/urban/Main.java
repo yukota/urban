@@ -11,7 +11,6 @@ public class Main {
     public static void main(final String[] args) {
         Runtime.getRuntime().addShutdownHook(new Shutdown());
         
-        
         //設定用クラス
         UrbanParams params = new UrbanParams();
         
@@ -21,7 +20,15 @@ public class Main {
     	UrbanController urbanController = new UrbanController(urbanModel);
     	int initHeight = params.getInitFrameHeight();
     	int initWidth = params.getInitFrameWidth();
+    	
     	UrbanView urbanView = new UrbanView(urbanController, initWidth, initHeight);
+    	urbanController.addObserver(urbanView);
+    	
+    	//initial終了
+    	
+    	//試行開始
+    	int trialTimes = params.getTrialTimes();
+    	urbanController.startTrial(trialTimes);
 	}
 }
 

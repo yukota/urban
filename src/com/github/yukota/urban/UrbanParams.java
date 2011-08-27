@@ -58,7 +58,7 @@ public class UrbanParams {
                                 Goals.STATION_LOT
                                 };
      /**ルート.*/
-     private RouteLandmark routeLandmark [][] ={
+     private RouteLandmark[][] routeLandmark = {
                                                 {RouteLandmark.W_STATION_A,RouteLandmark.T_STATION_B,RouteLandmark.W_COMPANY,RouteLandmark.END},
                                                 {RouteLandmark.B_STATION_LOT,RouteLandmark.T_STATION_B,RouteLandmark.W_COMPANY,RouteLandmark.END},
                                                 {RouteLandmark.W_COMPANY,RouteLandmark.END},
@@ -74,6 +74,8 @@ public class UrbanParams {
      /**会社の数.*/
      static private int COMPANY_NUM = 1000;
     
+     /**試行回数.*/
+     static private int TRIAL_TIMES = 10;
      
      //////////システムの設定////////////
      /**画面サイズ.*/
@@ -163,6 +165,17 @@ public class UrbanParams {
     }
     public double getLengthOfWorldHeight() {
         return WORLD_HEIGHT;
+    }
+
+
+
+
+    /**
+     * 試行回数のgetter.
+     * @return
+     */
+    public int getTrialTimes() {
+        return TRIAL_TIMES;
     }
     
 }

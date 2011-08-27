@@ -42,8 +42,6 @@ public class MapPanel extends JPanel {
     
     protected Coord sizeFitter(Coord coord) {
         //画面のサイズを取得
-        System.out.println("x"+coord.getX());
-        System.out.println("y"+coord.getY());
         Dimension dim = this.getSize();
         //x座標
         double retX = coord.getX() * dim.getWidth() / maxWidth  ;
@@ -57,8 +55,6 @@ public class MapPanel extends JPanel {
     
     protected Coord coordFitter(Coord coord,Coord fixedLength) {
         //画面のサイズを取得
-        System.out.println("x"+coord.getX());
-        System.out.println("y"+coord.getY());
         Dimension dim = this.getSize();
         //x座標
         double retX = coord.getX() * dim.getWidth() / maxWidth + dim.getWidth()/2 - fixedLength.getX() / 2;

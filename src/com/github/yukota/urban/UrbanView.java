@@ -2,12 +2,14 @@ package com.github.yukota.urban;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-public class UrbanView {
+public class UrbanView implements Observer {
 	private UrbanController controller;
 	
 	/**がめんさいず*/
@@ -80,5 +82,11 @@ public class UrbanView {
 	    //パネルの合成
 	    return basePanel;
 	}
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        System.out.println("描画更新");
+        
+    }
 
 }
