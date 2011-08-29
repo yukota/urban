@@ -4,7 +4,14 @@ import java.util.Observable;
 
 public class UrbanController extends Observable {
 
+    
 	private UrbanModel model;
+	
+	/**試行回数用ループカウンタ.*/
+	private int trialLoop;
+	/**試行回数.*/
+	private int trialNum;
+	
 	public UrbanController(UrbanModel urbanModel) {
 		model = urbanModel;
 		
@@ -15,16 +22,27 @@ public class UrbanController extends Observable {
     
 	/**
 	 * 試行を行う
-	 * @param trialTimes
+	 * @param trialTimes (int):交通選択試行回数
 	 */
     public void startTrial(final int trialTimes) {
-        for (int loop = 0; loop < trialTimes; loop++) {
-           this.trial();
-           //描画アップデート
-           setChanged();
-           super.notifyObservers();
-           }
-        
+        //試行回数の設定
+        this.trialNum = trialTimes;
+        //カウンタの初期化
+        this.trialLoop = 0;
+        this.doTrial();
+    }
+    
+    /**
+     * doTrial
+     */
+    public void doTrial() {
+        if(trialLoop < trialNum) {
+            this.trial();
+            trialLoop++;
+            //描画アップデート
+            setChanged();
+            super.notifyObservers();
+        }
     }
     
     /**
@@ -38,6 +56,7 @@ public class UrbanController extends Observable {
         //移動相コスト
         //駐車場の倒産.倒産時はきゃぱ0
         //エージェントのトリップ選択
+        //trial終了通知
     }
 
 	
