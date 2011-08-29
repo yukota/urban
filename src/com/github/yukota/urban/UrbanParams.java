@@ -7,7 +7,9 @@ package com.github.yukota.urban;
  *
  */
 public class UrbanParams {
+    /**描写空間の横幅.*/
     static private double WORLD_WIDTH = 5000;
+    /**描写空間の高さ.*/
     static private double WORLD_HEIGHT = 5000;
     
     /**2駅間の距離.*/
@@ -101,15 +103,17 @@ public class UrbanParams {
     /**
      * LENGTH_OF_BUISINESSZONEのアクセサ.
      * buisinesszone半径を返す
-     * @return
+     * @return double ビジネスゾーン半径
      */
     public double getLenthOfBusinesszone(){
         return LENGTH_OF_BUSINESSZONE;
     }
     
-    
-    
-    
+    /**
+     * AGENT_NUMのアクセサ.
+     * Agentの数を返す
+     * @return int エージェント数
+     */
     public int getNumOfAgent(){
         return AGENT_NUM;
     }
