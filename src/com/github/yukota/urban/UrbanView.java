@@ -9,16 +9,30 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
+/**
+ * UrbanView
+ * Viewモデル．
+ * 描画を行う
+ * @author YuK_Ota
+ *
+ */
 public class UrbanView implements Observer {
-	private UrbanController controller;
-	
-	/**がめんさいず*/
-	private int frameWidth;
+    /**Controllerのインスタンス.*/
+    private UrbanController controller;
+    /**画面サイズ幅.*/
+   	private int frameWidth;
+	/**画面サイズ高さ.*/
 	private int frameHeight;
 
-	public UrbanView(UrbanController urbanController, int initHeight,int initWidth) {
+	/**
+	 * コンストラクタ.
+	 * @param urbanController Controllerモデルのインスタンス
+	 * @param initHeight int 画面サイズ高さ
+	 * @param initWidth int 画面サイズ幅
+	 */
+	public UrbanView(final UrbanController urbanController, final int initHeight, final int initWidth) {
 		controller = urbanController;
-		this. frameWidth = initWidth;
+		this.frameWidth = initWidth;
 		this.frameHeight = initHeight;
 		
 		//初期描写
@@ -26,7 +40,7 @@ public class UrbanView implements Observer {
 	}
 	
 	/**
-	 * 初期描写
+	 * 初期描写.
 	 */
 	private void initView() {
 	    //ウインドウでもつくろうか
@@ -83,10 +97,13 @@ public class UrbanView implements Observer {
 	    return basePanel;
 	}
 
+	/**
+	 * update.
+	 * ViewControllerにより通知される．
+	 */
     @Override
-    public void update(Observable arg0, Object arg1) {
+    public final void update(final Observable arg0, final Object arg1) {
         System.out.println("描画更新");
-        
     }
 
 }

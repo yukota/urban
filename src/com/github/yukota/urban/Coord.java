@@ -12,11 +12,11 @@ public class Coord {
     private double y;
     
     /**
-     * コンストラクタ
-     * @param inX
-     * @param inY
+     * コンストラクタ.
+     * @param inX double x座標
+     * @param inY double y座標
      */
-    public Coord(double inX, double inY) {
+    public Coord(final double inX, final double inY) {
         this.setX(inX);
         this.setY(inY);
     }
@@ -36,6 +36,5 @@ public class Coord {
     public double getY(){
         return y;
     }
-    
     
 }
