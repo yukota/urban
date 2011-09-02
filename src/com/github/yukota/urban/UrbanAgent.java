@@ -67,6 +67,25 @@ public class UrbanAgent {
     public Coord getCoord(){
         return this.coord;
     }
+
+    /**
+     * パラメタを初期化する
+     */
+    public void reset(Coord initCoord) {
+        //家の設定
+        this.coord = initCoord;
+        
+        this.transferTime = 0;
+        this.fatigue = 0;
+        this.transferCost = 0;
+        this.distanceByCar = 0;
+        this.distanceByWalk = 0;
+        this.distanceByBike = 0;
+        this.distanceByTrain = 0;
+        
+        this.parking = 0;
+        this.bikelot = 0;
+    }
     
        
     

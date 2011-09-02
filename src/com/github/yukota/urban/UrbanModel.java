@@ -203,6 +203,17 @@ public class UrbanModel {
         }
         return agentCoord;
     }
+
+    public void resetAgent() {
+        for (int loop = 0; loop < agent.length; loop++) {
+               agent[loop].reset(home[loop].getCoord());
+        }
+    }
+
+    public void moveAgentToDistination() {
+        // TODO Auto-generated method stub
+        
+    }
 	
 	
 	

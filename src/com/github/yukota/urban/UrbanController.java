@@ -57,14 +57,16 @@ public class UrbanController extends Observable {
      */
     private void trial() {
         //agentの初期化が必要なモノを初期化
-        //駐車場の仮想容量設定
+        model.resetAgent();
         //エージェントの移動
+        model.moveAgentToDistination();
         //移動相コスト
         //駐車場の倒産.倒産時はきゃぱ0
         //エージェントのトリップ選択
         //trial終了通知
     }
-
+    
+    
     /**
      * Homezoneの中心座標を取得する.
      * @return Coord Homezoneの中心座標
