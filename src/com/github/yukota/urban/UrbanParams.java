@@ -18,7 +18,8 @@ public class UrbanParams {
     static private double WORLD_Y_MIN = -4000;
     
     /**密度計算用パラメタ，空間を分割する数.*/
-    static private int WORLD_DEVIED  = 100;
+    static private int WORLD_X_DEVIED  = 100;
+    static private int WORLD_Y_DEVIED  = 100;
     
     
     
@@ -167,7 +168,7 @@ public class UrbanParams {
 
 
     /**
-     * Homezoneの中心座標を
+     * Homezoneの中心座標取得する.
      * @return Coord　Homezone中心
      */
     public Coord getCoordCenterOfHomezone() {
@@ -202,6 +203,12 @@ public class UrbanParams {
     }
 
 
+    public int getNumOfAreaX (){
+        return WORLD_X_DEVIED;
+    }
+    public int getNumOfAreaY (){
+        return WORLD_Y_DEVIED;
+    }
 
     /**
      * 試行回数のgetter.

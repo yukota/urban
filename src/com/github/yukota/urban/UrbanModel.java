@@ -13,6 +13,10 @@ public class UrbanModel {
 	private UrbanParking parking[];
 	private UrbanBikeLot bikeLot[];
 	
+	//区画の車密度
+	private double carDensity[][];
+	
+	
 	public UrbanModel(UrbanParams inParams) {
 	    this.params = inParams;
 	    this.setupTrip();
@@ -20,7 +24,10 @@ public class UrbanModel {
 	    this.setupCompany();
 		this.setupAgent();
 		this.setupParkLot();
+		this.initCarDensity();
 	}
+	
+	
 	
 	/**
 	 * tripのインスタンス作成
@@ -224,6 +231,16 @@ public class UrbanModel {
             //疲れの計算
         }
         
+    }
+    
+    /**
+     * 車密度を初期化する
+     */
+    private void initCarDensity() {
+        //パラメタ取得
+        int xNum = params.getNumOfAreaX();
+        int yNum = params.getNumOfAreaY();
+        carDensity = new double [xNum][yNum];
     }
     
     public void calcDencity(){
