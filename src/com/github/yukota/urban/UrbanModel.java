@@ -213,6 +213,7 @@ public class UrbanModel {
     public void moveAgentToDistination() {
         for (int loop = 0; loop < agent.length; loop++) {
             //車密度の計算
+            this.calcDencity();
         
             //エージェントの速度の更新
         
@@ -222,6 +223,10 @@ public class UrbanModel {
             //移動
             //疲れの計算
         }
+        
+    }
+    
+    public void calcDencity(){
         
     }
 	
