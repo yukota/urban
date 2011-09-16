@@ -43,13 +43,11 @@ public class UrbanController extends Observable {
      * 試行回数の管理，試行の実行.1試行終了時にViewに通知を行う．
      */
     public final void doTrial() {
-        if (trialLoop < trialNum) {
             this.moveAgent();
             trialLoop++;
             //描画アップデート
             setChanged();
             super.notifyObservers();
-        }
     }
     
     /**

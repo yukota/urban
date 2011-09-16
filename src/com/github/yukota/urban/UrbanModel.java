@@ -182,13 +182,21 @@ public class UrbanModel {
                 Coord agentCoord = agent[loop].getCoord();
                 Coord unitTripCoord = params.getCoordOfGoals(agent[loop].getCurrentPlace()) ;
                 double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - unitTripCoord.getX()),2) + Math.pow((agentCoord.getX() - unitTripCoord.getX()),2));
-                if(lengthOfBetween < 0.001){
+                if(lengthOfBetween < 0.1){
                    //次のルートへ移動 
                     agent[loop].setNextSpot();
                 }
                 //移動
                 
                 double moveSpeed = params.getSpeedOfWalk();
+                
+                
+                if(moveSpeed < lengthOfBetween) {
+                    moveSpeed = lengthOfBetween;
+                }
+              
+                
+                
                 double currentX = agentCoord.getX();
                 double currentY = agentCoord.getY();
                 
@@ -197,6 +205,9 @@ public class UrbanModel {
                 double distY =  unitTripCoord.getY();
                
                 double theta = Math.atan2(distY - currentY, distX - currentX);
+                
+                
+                
                 
                 double moveX= moveSpeed * Math.cos(theta);
                 double moveY= moveSpeed * Math.sin(theta);
