@@ -12,8 +12,20 @@ public class UnitTrip {
         this.method = inTripMethods;
         this.goal_id = inGoals;
     }
+    
+    
+    public TripMethods getMethod(){
+        return this.method;
+    }
+    
+    public Goals getGoalId(){
+        return this.goal_id;
+    }
+    
+    
 
 }
+
 
 enum TripMethods {
     WALK,
@@ -31,5 +43,9 @@ enum Goals {
     HIGHWAY_E,
     PARKING,
     BIKE_LOT,
-    STATION_LOT
+    STATION_LOT,
+    END
 }
+
+
+

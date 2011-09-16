@@ -6,12 +6,9 @@ public class UrbanModel {
 	private UrbanAgent agent[];
 	/**家．*/
 	private UrbanHome home[];
-	private UnitTrip unitTrip[];
+	private Goals[][] route;
 	private UrbanParams params;
-	private Route route[];
 	private UrbanCompany company[];
-	private UrbanParking parking[];
-	private UrbanBikeLot bikeLot[];
 	
 	//区画の車密度
 	private double carDensity[][];
@@ -23,8 +20,6 @@ public class UrbanModel {
 		this.setupHome();
 	    this.setupCompany();
 		this.setupAgent();
-		this.setupParkLot();
-		this.initCarDensity();
 	}
 	
 	
@@ -32,28 +27,8 @@ public class UrbanModel {
 	/**
 	 * tripのインスタンス作成
 	 */
-	private void setupTrip() {
-	    this.setupUnitTrip();
-		this.setupRoute();
-	}
-	
-	private void setupUnitTrip() {
-	   TripMethods[] tripMethod = this.params.getUnitTrip();
-	   Goals[] goal_id = this.params.getGoalId();
-	   int loopMax = tripMethod.length;
-	   unitTrip = new UnitTrip[loopMax];
-	   for (int loopCount = 0; loopCount < loopMax; loopCount++) {
-	       unitTrip[loopCount] = new UnitTrip(tripMethod[loopCount], goal_id[loopCount]);
-	   }
-	}
-	
-	private void setupRoute(){
-	    RouteLandmark [][] routeParam = this.params.getRoute();
-	    int routeNum = routeParam.length;
-	    route = new Route[routeNum];
-	    for(int loop = 0; loop < routeNum; loop++){
-    	    route[loop] = new Route(routeParam[loop]);
-	    }
+	private void setupTrip(){
+	    route = params.getRoute();
 	}
 	
 	/**
@@ -63,8 +38,10 @@ public class UrbanModel {
         int homeNum = params.getNumOfHome();
         double lengthOfStations  = params.getLengthOfStations();
         double lengthOfHomezone= params.getLenthOfHomezone();
+        
 		home = new UrbanHome[homeNum];
 		for (int iLoop = 0; iLoop < homeNum; iLoop += 2) {
+		    Goals routeLandmark[][] = params.getRoute();
 			home[iLoop] = new UrbanHome(lengthOfStations, lengthOfHomezone);
 			home[iLoop+1] = new UrbanHome(lengthOfStations, lengthOfHomezone);
 			//box-muller使用のためcoordを再計算
@@ -107,61 +84,15 @@ public class UrbanModel {
 		agent = new UrbanAgent[agentNum];
 		for (int iLoop = 0; iLoop < agentNum; iLoop++) {
 		    //初期家の決定
-		    int selectHome = (int) (Math.random() % home.length);
+		    int selectHome = (int) (Math.random() * home.length -1);
+		    
 		    Coord homeCoord = home[selectHome].getCoord();
 		    //初期会社の決定
-		    int selectCompany = (int) (Math.random() % company.length);
+		    int selectCompany = (int) (Math.random() * company.length -1);
 		    //初期ルートの決定
-		    int selectRoute = (int) (Math.random() % route.length);
+		    int selectRoute = (int) (Math.random() * route.length -1);
 			agent[iLoop] = new UrbanAgent(homeCoord, company[selectCompany], route[selectRoute]);
 		}
-	}
-	
-	/**
-	 * 
-	 */
-	private void setupParkLot() {
-	    this.setupParking();
-	    this.setupBikeLot();
-	}
-	private void setupParking(){
-	    double lengthOfBusinesszone = params.getLenthOfBusinesszone();
-	    double lengthOfStations = params.getLengthOfStations();
-	    //設定park数
-	    int parkingNum = params.getNumOfParking();
-	    parking = new UrbanParking[parkingNum];
-	    for (int loop = 0;loop < parkingNum;loop += 2) {
-	        parking[loop] = new UrbanParking(lengthOfStations, lengthOfBusinesszone);
-	        parking[loop + 1] = new UrbanParking(lengthOfStations, lengthOfBusinesszone);
-			BoxMuller boxMuller1 = parking[loop].getBoxMuller();
-			double coord1X = boxMuller1.getResultCos();
-			double coord2X = boxMuller1.getResultSin();
-			BoxMuller boxMuller2 = parking[loop + 1].getBoxMuller();
-			double coord1Y = boxMuller2.getResultCos();
-			double coord2Y = boxMuller2.getResultSin();
-			parking[loop].setCoord(coord1X, coord1Y);
-			parking[loop + 1].setCoord(coord2X, coord2Y);
-	    }
-	}
-	
-	private void setupBikeLot(){
-	    double lengthOfBusinesszone = params.getLenthOfBusinesszone();
-	    double lengthOfStations = params.getLengthOfStations();
-	    //設定park数
-	    int bikelotNum = params.getNumOfBikeLot();
-	    bikeLot = new UrbanBikeLot[bikelotNum];
-	    for (int loop = 0; loop < bikelotNum; loop += 2) {
-	        bikeLot[loop] = new UrbanBikeLot(lengthOfStations, lengthOfBusinesszone);
-	        bikeLot[loop + 1] = new UrbanBikeLot(lengthOfStations, lengthOfBusinesszone);
-			BoxMuller boxMuller1 = bikeLot[loop].getBoxMuller();
-			double coord1X = boxMuller1.getResultCos();
-			double coord2X = boxMuller1.getResultSin();
-			BoxMuller boxMuller2 = bikeLot[loop + 1].getBoxMuller();
-			double coord1Y = boxMuller2.getResultCos();
-			double coord2Y = boxMuller2.getResultSin();
-			bikeLot[loop].setCoord(coord1X, coord1Y);
-			bikeLot[loop + 1].setCoord(coord2X, coord2Y);
-	    }
 	}
 
     public Coord getCoordCenterOfHomezone() {
@@ -203,7 +134,7 @@ public class UrbanModel {
     }
 
      Coord[] getCoordOfAgent() {
-        int agentNum = company.length;
+        int agentNum = agent.length;
         Coord [] agentCoord = new Coord[agentNum];
         for (int loop = 0; loop < agentNum; loop++) {
             agentCoord [loop] = agent[loop].getCoord();
@@ -211,43 +142,72 @@ public class UrbanModel {
         return agentCoord;
     }
 
-    public void resetAgent() {
-        for (int loop = 0; loop < agent.length; loop++) {
-               agent[loop].reset(home[loop].getCoord());
+    public void moveAgentToDistination() {
+        
+        boolean resetFlg = false;
+        //すべてのagentの行動が終了したか問い合わせる
+        for(int loop = 0; loop < agent.length; loop++){
+            //RouteがENDかつ，現在が目標座標
+            if(agent[loop].getCurrentPlace() == Goals.END){
+                Coord agentCoord = agent[loop].getCoord();
+                Coord companyCoord = agent[loop].getCoordOfCompany();
+                double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - companyCoord.getX()),2) + Math.pow((agentCoord.getX() - companyCoord.getX()),2));
+                if(lengthOfBetween < 0.001){
+                    continue;
+                }
+                 
+                
+                
+                
+                
+                double moveSpeed = params.getSpeedOfWalk();
+                double currentX = agentCoord.getX();
+                double currentY = agentCoord.getY();
+                
+                
+                double distX =  agentCoord.getX();
+                double distY =  agentCoord.getY();
+               
+                double theta = Math.atan2(distY - currentY, distX - currentX);
+                
+                double moveX= moveSpeed * Math.cos(theta);
+                double moveY= moveSpeed * Math.sin(theta);
+                
+                Coord nextCoord = new Coord(moveX  + currentX, moveY  + currentY);
+                agent.clone()[loop].setCoord(nextCoord);
+                
+                
+            }else{
+               //ENDではない 
+                Coord agentCoord = agent[loop].getCoord();
+                Coord unitTripCoord = params.getCoordOfGoals(agent[loop].getCurrentPlace()) ;
+                double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - unitTripCoord.getX()),2) + Math.pow((agentCoord.getX() - unitTripCoord.getX()),2));
+                if(lengthOfBetween < 0.001){
+                   //次のルートへ移動 
+                    agent[loop].setNextSpot();
+                }
+                //移動
+                
+                double moveSpeed = params.getSpeedOfWalk();
+                double currentX = agentCoord.getX();
+                double currentY = agentCoord.getY();
+                
+                
+                double distX =  unitTripCoord.getX();
+                double distY =  unitTripCoord.getY();
+               
+                double theta = Math.atan2(distY - currentY, distX - currentX);
+                
+                double moveX= moveSpeed * Math.cos(theta);
+                double moveY= moveSpeed * Math.sin(theta);
+                
+                Coord nextCoord = new Coord(moveX  + currentX, moveY  + currentY);
+                agent.clone()[loop].setCoord(nextCoord);
+            }
         }
     }
 
-    public void moveAgentToDistination() {
-        for (int loop = 0; loop < agent.length; loop++) {
-            //車密度の計算
-            this.calcDencity();
-        
-            //エージェントの速度の更新
-        
-            //渋滞，疲れの計算
-        
-            //次の目的地の計算
-            //移動
-            //疲れの計算
-        }
-        
-    }
     
-    /**
-     * 車密度を初期化する
-     */
-    private void initCarDensity() {
-        //パラメタ取得
-        int xNum = params.getNumOfAreaX();
-        int yNum = params.getNumOfAreaY();
-        carDensity = new double [xNum][yNum];
-    }
-    
-    public void calcDencity(){
-        
-    }
-	
-	
 	
 	
 

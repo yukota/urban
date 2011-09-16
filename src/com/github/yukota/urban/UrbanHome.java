@@ -18,6 +18,7 @@ public class UrbanHome {
     
     /**
      * コンストラクタ
+     * @param routeLandmark 
      * @param inParams
      */
     public UrbanHome(double inLengthOfStations, double inLengthofHomezone){

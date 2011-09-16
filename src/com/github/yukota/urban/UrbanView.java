@@ -23,6 +23,8 @@ public class UrbanView implements Observer {
    	private int frameWidth;
 	/**画面サイズ高さ.*/
 	private int frameHeight;
+	
+	private AgentMapPanel agentPanel;
 
 	/**
 	 * コンストラクタ.
@@ -66,11 +68,13 @@ public class UrbanView implements Observer {
 	    JPanel basePanel = new JPanel();
 	    basePanel.setLayout(new OverlayLayout(basePanel));
 	    //街の輪っかをかきます
+	    /*
 	    Coord centerOfHomezone = this.controller.getCoordCenterOfHomezone();
 	    double lengthOfHomezone = this.controller.getLengthOfHomezone();
 	    JPanel cityPanel = new BackgroundMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, centerOfHomezone, lengthOfHomezone);
 	    cityPanel.setOpaque(false);
 	    basePanel.add(cityPanel, "1");
+	    */
 	    
 	    //お家を書きます
 	    //家の一覧
@@ -89,7 +93,7 @@ public class UrbanView implements Observer {
 	    
 	    //agentの描写
 	    Coord [] agentCoord = this.controller.getCoordOfAgent();
-	    JPanel agentPanel = new AgentMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, agentCoord);
+	    agentPanel = new AgentMapPanel(lengthOfWorldWidth, lengthOfWorldHeight, agentCoord);
 	    agentPanel.setOpaque(false);
 	    basePanel.add(agentPanel, "-4");
 	    
@@ -104,6 +108,10 @@ public class UrbanView implements Observer {
     @Override
     public final void update(final Observable arg0, final Object arg1) {
         System.out.println("描画更新");
+	    Coord [] reAgentCoord = this.controller.getCoordOfAgent();
+	    
+	    agentPanel.setCoords(reAgentCoord);
+        controller.doTrial();
     }
 
 }

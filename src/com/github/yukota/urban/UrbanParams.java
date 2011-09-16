@@ -43,6 +43,8 @@ public class UrbanParams {
     /**駐輪場の数.*/
     static private int BIKELOT_NUM = 1000;
     
+    static private double SPEED_WALK = 100;
+    
     /**unit_tripの数.*/
     private TripMethods tripMethod[] = {TripMethods.WALK,
                                         TripMethods.WALK,
@@ -69,7 +71,11 @@ public class UrbanParams {
                                 Goals.STATION_B,
                                 Goals.STATION_LOT
                                 };
+     
+     
+     
      /**ルート.*/
+     /*
      private RouteLandmark[][] routeLandmark = {
                                                 {RouteLandmark.W_STATION_A,RouteLandmark.T_STATION_B,RouteLandmark.W_COMPANY,RouteLandmark.END},
                                                 {RouteLandmark.B_STATION_LOT,RouteLandmark.T_STATION_B,RouteLandmark.W_COMPANY,RouteLandmark.END},
@@ -82,12 +88,23 @@ public class UrbanParams {
                                                 {RouteLandmark.B_STATION_A,RouteLandmark.T_STATION_B,RouteLandmark.W_COMPANY,RouteLandmark.END}
                                                 };
      
+     */
+      private Goals[][] routeLandmark = {
+                                                {Goals.STATION_A,Goals.STATION_B, Goals.STATION_B,Goals.COMPANY, Goals.STATION_B, Goals.END},
+                                                {Goals.STATION_LOT, Goals.STATION_B, Goals.END},
+                                                {Goals.BIKE_LOT,Goals.END},
+                                                {Goals.HIGHWAY_S,Goals.HIGHWAY_E,Goals.PARKING,Goals.END},
+                                                {Goals.END},    /////違法駐輪
+                                                {Goals.STATION_A,Goals.STATION_B,Goals.END}
+                                                };
+     
+ 
         
      /**会社の数.*/
      static private int COMPANY_NUM = 1000;
     
      /**試行回数.*/
-     static private int TRIAL_TIMES = 10;
+     static private int TRIAL_TIMES = 25;
      
      //////////システムの設定////////////
      /**画面サイズ.*/
@@ -132,7 +149,7 @@ public class UrbanParams {
         return HOME_NUM;
     }
     
-    public TripMethods[] getUnitTrip(){
+    public TripMethods[] getTripMethod(){
         return tripMethod;
     }
     
@@ -140,7 +157,7 @@ public class UrbanParams {
         return goal_id;
     }
     
-    public RouteLandmark[][] getRoute(){
+    public Goals[][] getRoute(){
         return routeLandmark;
     }
     
@@ -218,4 +235,37 @@ public class UrbanParams {
         return TRIAL_TIMES;
     }
     
+    public Coord getCoordOfGoals(Goals goal){
+        Coord retCoord = null;
+        switch(goal){
+            case STATION_A:
+                retCoord = new Coord(-LENGTH_OF_STATIONS/2,0);
+                break;
+            case STATION_B:
+                retCoord = new Coord(LENGTH_OF_STATIONS/2,0);
+                break;
+            case HIGHWAY_S:
+                retCoord = new Coord(-LENGTH_OF_STATIONS/2,20);
+                break;
+            case HIGHWAY_E:
+                retCoord = new Coord(LENGTH_OF_STATIONS/2,20);
+                break;
+            case PARKING:
+                retCoord = new Coord(-LENGTH_OF_STATIONS/2,-20);
+                break;
+            case BIKE_LOT:
+                retCoord = new Coord(-LENGTH_OF_STATIONS/2,-40);
+                break;
+            case STATION_LOT: 
+                retCoord = new Coord(LENGTH_OF_STATIONS/2,-40);
+                break;
+        }
+        
+        return retCoord;
+    }
+    
+    
+    public double getSpeedOfWalk(){
+        return SPEED_WALK;
+    }
 }

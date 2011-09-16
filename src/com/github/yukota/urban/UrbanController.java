@@ -44,7 +44,7 @@ public class UrbanController extends Observable {
      */
     public final void doTrial() {
         if (trialLoop < trialNum) {
-            this.trial();
+            this.moveAgent();
             trialLoop++;
             //描画アップデート
             setChanged();
@@ -55,15 +55,12 @@ public class UrbanController extends Observable {
     /**
      * 試行を1回おこなう.
      */
-    private void trial() {
-        //agentの初期化が必要なモノを初期化
-        model.resetAgent();
+    private void moveAgent() {
+        
+        //agentの初期化が必要であれば初期化
+//        model.resetAgent();
         //エージェントの移動
         model.moveAgentToDistination();
-        //移動相コスト
-        //駐車場の倒産.倒産時はきゃぱ0
-        //エージェントのトリップ選択
-        //trial終了通知
     }
     
     

@@ -14,7 +14,8 @@ public class UrbanAgent {
     /**エージェントの偏行:時間.*/
     private double usableTime;
     /**トリップ.*/
-    private Route route;
+    private Goals[] route;
+    private int currentPlace;
     /**移動時間.*/
     private double transferTime;
     /**移動距離_車.*/
@@ -40,12 +41,13 @@ public class UrbanAgent {
      * コンストラクタ
      * @param inParams
      */
-    public UrbanAgent(Coord homeCoord,UrbanCompany initCompany, Route initRoute){
+    public UrbanAgent(Coord homeCoord,UrbanCompany initCompany, Goals[] initRoute){
         //開始地点は家
         this.coord = homeCoord;
         this.company = initCompany;
         //初期ルートの設定
         this.route = initRoute;
+        this.currentPlace = 0;
         //偏光の決定
         this.setupStatus();
         //トリップの割り当て
@@ -68,6 +70,14 @@ public class UrbanAgent {
         return this.coord;
     }
 
+    public Goals getCurrentPlace(){
+        return route[currentPlace];
+    }
+    
+    public Coord getCoordOfCompany(){
+        return company.getCoord();
+    }
+    
     /**
      * パラメタを初期化する
      */
@@ -85,6 +95,15 @@ public class UrbanAgent {
         
         this.parking = 0;
         this.bikelot = 0;
+    }
+
+    public void setNextSpot() {
+        currentPlace++;
+    }
+
+    public void setCoord(Coord nextCoord) {
+        this.coord = nextCoord;
+        
     }
     
        

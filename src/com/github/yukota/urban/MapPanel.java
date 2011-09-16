@@ -36,7 +36,7 @@ public class MapPanel extends JPanel {
                                                      fixedLengthCoord.getX(),
                                                      fixedLengthCoord.getY());
         
-        g2.draw(homeCircle1);
+        g2.fill(homeCircle1);
     }
     
     
