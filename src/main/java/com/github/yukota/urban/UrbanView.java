@@ -105,7 +105,6 @@ public class UrbanView implements Observer {
 	 * update.
 	 * ViewControllerにより通知される．
 	 */
-    @Override
     public final void update(final Observable arg0, final Object arg1) {
         System.out.println("描画更新");
 	    Coord [] reAgentCoord = this.controller.getCoordOfAgent();

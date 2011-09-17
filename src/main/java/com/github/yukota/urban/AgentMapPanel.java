@@ -24,7 +24,6 @@ public class AgentMapPanel extends MapPanel implements Runnable {
         super.g = g;
         
         int agentNum = coord.length;
-        //全家について処理
         for (int loop = 0; loop < agentNum; loop++) {
            drawCircle(coord[loop], 100,Color.BLACK);
         }
@@ -32,7 +31,6 @@ public class AgentMapPanel extends MapPanel implements Runnable {
         
     }
 
-    @Override
     public void run() {
         while(true){
             repaint();
