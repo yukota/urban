@@ -34,7 +34,6 @@ public class UrbanController extends Observable {
         //試行回数の設定
         this.trialNum = trialTimes;
         //カウンタの初期化
-        this.trialLoop = 0;
         this.doTrial();
     }
     
@@ -43,11 +42,13 @@ public class UrbanController extends Observable {
      * 試行回数の管理，試行の実行.1試行終了時にViewに通知を行う．
      */
     public final void doTrial() {
+        while (trialLoop < trialNum) {
             this.moveAgent();
             trialLoop++;
             //描画アップデート
             setChanged();
-            super.notifyObservers();
+            notifyObservers();
+        }
     }
     
     /**

@@ -33,10 +33,10 @@ public class UrbanParams {
     static private double LENGTH_OF_BUSINESSZONE = 3200.0;
     
     /**エージェントの数.*/
-    static private int AGENT_NUM = 10000;
+    static private int AGENT_NUM = 100;
     
     /**家の数.*/
-    static private int HOME_NUM = 10000;
+    static private int HOME_NUM = 1000;
     
     /**駐車場の数.*/
     static private int PARKING_NUM = 1000;
@@ -90,7 +90,7 @@ public class UrbanParams {
      
      */
       private Goals[][] routeLandmark = {
-                                                {Goals.STATION_A,Goals.STATION_B, Goals.STATION_B,Goals.COMPANY, Goals.STATION_B, Goals.END},
+                                                {Goals.STATION_A,Goals.STATION_B, Goals.STATION_B, Goals.STATION_B, Goals.END},
                                                 {Goals.STATION_LOT, Goals.STATION_B, Goals.END},
                                                 {Goals.BIKE_LOT,Goals.END},
                                                 {Goals.HIGHWAY_S,Goals.HIGHWAY_E,Goals.PARKING,Goals.END},
@@ -104,7 +104,7 @@ public class UrbanParams {
      static private int COMPANY_NUM = 1000;
     
      /**試行回数.*/
-     static private int TRIAL_TIMES = 25;
+     static private int TRIAL_TIMES = 25000;
      
      //////////システムの設定////////////
      /**画面サイズ.*/

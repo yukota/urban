@@ -25,19 +25,19 @@ public class UrbanModel {
 	
 	
 	/**
-	 * tripのインスタンス作成
+	 * tripのインスタンス作成. 
 	 */
-	private void setupTrip(){
+	private void setupTrip() {
 	    route = params.getRoute();
 	}
 	
 	/**
-	 * homeのインスタンス作成
+	 * homeのインスタンス作成.
 	 */
 	private void setupHome() {
         int homeNum = params.getNumOfHome();
         double lengthOfStations  = params.getLengthOfStations();
-        double lengthOfHomezone= params.getLenthOfHomezone();
+        double lengthOfHomezone = params.getLenthOfHomezone();
         
 		home = new UrbanHome[homeNum];
 		for (int iLoop = 0; iLoop < homeNum; iLoop += 2) {
@@ -148,7 +148,10 @@ public class UrbanModel {
         //すべてのagentの行動が終了したか問い合わせる
         for(int loop = 0; loop < agent.length; loop++){
             //RouteがENDかつ，現在が目標座標
+            System.out.println("trial"+loop);
             if(agent[loop].getCurrentPlace() == Goals.END){
+                
+                System.out.println("stateEnd"+loop);
                 Coord agentCoord = agent[loop].getCoord();
                 Coord companyCoord = agent[loop].getCoordOfCompany();
                 double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - companyCoord.getX()),2) + Math.pow((agentCoord.getX() - companyCoord.getX()),2));
@@ -178,11 +181,22 @@ public class UrbanModel {
                 
                 
             }else{
+                System.out.println("stateNotEnd"+loop);
                //ENDではない 
                 Coord agentCoord = agent[loop].getCoord();
+                System.out.println("stateCurrentX"+agentCoord.getX());
+                System.out.println("stateCurrentY"+agentCoord.getY());
+                
                 Coord unitTripCoord = params.getCoordOfGoals(agent[loop].getCurrentPlace()) ;
-                double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - unitTripCoord.getX()),2) + Math.pow((agentCoord.getX() - unitTripCoord.getX()),2));
+                
+                System.out.println("dist"+agent[loop].getCurrentPlace().toString());
+                System.out.println("statedistX"+unitTripCoord.getX());
+                System.out.println("statedistY"+unitTripCoord.getY());
+                
+                double lengthOfBetween = Math.sqrt(Math.pow((agentCoord.getX() - unitTripCoord.getX()),2) + Math.pow((agentCoord.getY() - unitTripCoord.getY()),2));
                 if(lengthOfBetween < 0.1){
+                    System.out.println("stateNext"+loop);
+               //ENDではない 
                    //次のルートへ移動 
                     agent[loop].setNextSpot();
                 }
@@ -191,7 +205,7 @@ public class UrbanModel {
                 double moveSpeed = params.getSpeedOfWalk();
                 
                 
-                if(moveSpeed < lengthOfBetween) {
+                if(moveSpeed > lengthOfBetween) {
                     moveSpeed = lengthOfBetween;
                 }
               
@@ -206,14 +220,14 @@ public class UrbanModel {
                
                 double theta = Math.atan2(distY - currentY, distX - currentX);
                 
-                
-                
-                
                 double moveX= moveSpeed * Math.cos(theta);
                 double moveY= moveSpeed * Math.sin(theta);
                 
+                System.out.println("Next move pointX" + moveX  + currentX);
+                System.out.println("Next move pointY" + moveY  + currentY);
+                
                 Coord nextCoord = new Coord(moveX  + currentX, moveY  + currentY);
-                agent.clone()[loop].setCoord(nextCoord);
+                agent[loop].setCoord(nextCoord);
             }
         }
     }

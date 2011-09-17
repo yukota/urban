@@ -24,7 +24,6 @@ public class AgentMapPanel extends MapPanel implements Runnable {
         super.g = g;
         
         int agentNum = coord.length;
-        System.out.println("agentCoord"+coord[0].getX());
         //全家について処理
         for (int loop = 0; loop < agentNum; loop++) {
            drawCircle(coord[loop], 100,Color.BLACK);

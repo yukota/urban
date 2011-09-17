@@ -111,7 +111,7 @@ public class UrbanView implements Observer {
 	    Coord [] reAgentCoord = this.controller.getCoordOfAgent();
 	    
 	    agentPanel.setCoords(reAgentCoord);
-        controller.doTrial();
+        //controller.doTrial();
     }
 
 }
