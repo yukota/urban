@@ -1,12 +1,13 @@
 package com.github.yukota.urban;
 
+import java.io.FileNotFoundException;
+
 public class Model {
-    /**Name of setting file*/
-    private static String SETTING_FILE = "setting.yaml";
     
+    SystemSetting systemSetting = new SystemSetting();
     
     /**
-     * Constructer of DataModel.
+     * Constructer of DataModel
      */
     Model() {
         
@@ -14,8 +15,9 @@ public class Model {
 
     /**
      * Read setting.
+     * @throws FileNotFoundException 
      */
-    public void init() {
+    public void init() throws FileNotFoundException {
         //yamlの読み込み
         this.readSetting();
         
@@ -25,9 +27,10 @@ public class Model {
     /**
      * Read setting file
      * 設定ファイルを読み込む.
+     * @throws FileNotFoundException 
      */
-    private void readSetting() {
-        
+    private void readSetting() throws FileNotFoundException {
+        systemSetting.readSetting();
         
     }
     

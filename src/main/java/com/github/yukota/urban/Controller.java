@@ -1,5 +1,7 @@
 package com.github.yukota.urban;
 
+import java.io.FileNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +26,9 @@ public class Controller {
      * prepare simulater.
      * read initial data
      * setup view
+     * @throws FileNotFoundException 
      */
-    public void init() {
+    public void init() throws FileNotFoundException {
         logger.debug("init:start");
         model.init();
         view.init();

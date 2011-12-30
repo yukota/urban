@@ -7,3 +7,6 @@
 
 .settings*
 .DS_Store
+
+#maven
+target

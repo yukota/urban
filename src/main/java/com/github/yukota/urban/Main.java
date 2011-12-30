@@ -1,5 +1,7 @@
 package com.github.yukota.urban;
 
+import java.io.FileNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +25,12 @@ public class Main {
         View view = new View();
         Model model = new Model(); 
         Controller controller = new Controller(view, model);
-        controller.init();
+        try {
+            controller.init();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         
 	}
