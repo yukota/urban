@@ -31,7 +31,8 @@ public class Controller {
     public void init() throws FileNotFoundException {
         logger.debug("init:start");
         model.init();
-        view.init();
+        //x,y
+        view.init(model.getSystemSetting().getViewWidth(),model.getSystemSetting().getViewHeight());
         
     }
     

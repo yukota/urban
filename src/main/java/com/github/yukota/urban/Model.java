@@ -20,8 +20,6 @@ public class Model {
     public void init() throws FileNotFoundException {
         //yamlの読み込み
         this.readSetting();
-        
-        
     }
     
     /**
@@ -31,8 +29,10 @@ public class Model {
      */
     private void readSetting() throws FileNotFoundException {
         systemSetting.readSetting();
-        
     }
     
+    public final SystemSetting getSystemSetting(){
+        return systemSetting;
+    }
 
 }
