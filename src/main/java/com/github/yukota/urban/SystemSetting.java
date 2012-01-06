@@ -39,7 +39,6 @@ public class SystemSetting extends BaseSetting {
         HashMap<String, String> data = (HashMap<String, String>) yamlObject;
         this.setViewWidth(data.get("width"));
         this.setViewHeight(data.get("height"));
-        
     }
     
 

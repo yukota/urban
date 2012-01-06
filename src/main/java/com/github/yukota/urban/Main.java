@@ -28,7 +28,8 @@ public class Main {
         try {
             controller.init();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         
@@ -39,16 +40,17 @@ public class Main {
 /**
  * 終了時処理.
  * @author YuK_Ota
- *
  */
 class Shutdown extends Thread {
+    Logger logger = LoggerFactory.getLogger(Shutdown.class);
     public Shutdown(){
        super();
     }
     
     @Override
     public void run() {
-       System.out.println("end process");
+        logger.debug("Application Urban end");
+        super.run();
     }
     
 }

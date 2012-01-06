@@ -23,7 +23,7 @@ public class Controller {
         this.model = model;
     }
     /**
-     * prepare simulater.
+     * prepare simulator.
      * read initial data
      * setup view
      * @throws FileNotFoundException 
@@ -32,7 +32,17 @@ public class Controller {
         logger.debug("init:start");
         model.init();
         //x,y
-        view.init(model.getSystemSetting().getViewWidth(),model.getSystemSetting().getViewHeight());
+        logger.debug("init:call view:init" 
+                     +  model.getSystemSetting().getViewWidth()
+                     +  "x"
+                     +  model.getSystemSetting().getViewHeight());
+        view.init(model.getSystemSetting().getViewWidth(),
+                  model.getSystemSetting().getViewHeight());
+        
+        //環境作成
+        logger.debug("init : create landmark : " + model.getFieldSetting().getField().size());
+        logger.debug("init : create landmark : " + model.getFieldSetting().getField().get(0).getName());
+        logger.debug("init : create landmark : " + model.getFieldSetting().getField().get(0).getCoord().getX());
         
     }
     

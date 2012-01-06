@@ -51,13 +51,13 @@ public class ViewApplet extends PApplet {
         noStroke();
         controlP5 = new ControlP5(this);
         controlP5.begin();
-        statusTextlabel = controlP5.addTextlabel("label","Booting...",10,10);
+        statusTextlabel = controlP5.addTextlabel("label", "Booting...", 10, 10);
         statusTextlabel.setColorValue(0);
         controlP5.end();
         
         //床面の初期化
-        for(int x = 0;  x < gridX; x++){
-            for(int y = 0;  y < gridY; y++){
+        for (int x = 0;  x < gridX; x++) {
+            for (int y = 0;  y < gridY; y++) {
                 floorStatus[x][y] = 0;
             }
         }
